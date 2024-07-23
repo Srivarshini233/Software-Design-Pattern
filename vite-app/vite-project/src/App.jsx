@@ -12,12 +12,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { ModeToggle } from "./components/mode-toggle";
+import GridPattern from "./components/magicui/animated-grid-pattern";
 
 const App = () => {
   return (
     <div>
       <ModeToggle/>
-      
+      <GridPattern/>
       <Dialog>
         <DialogTrigger asChild>
           <Button variant="outline">Edit Profile</Button>
