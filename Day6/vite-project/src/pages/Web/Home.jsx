@@ -1,5 +1,4 @@
 import React from 'react'
-import { AnimatedListDemo } from './AnimatedListDemo'
 import { BoxRevealDemo } from './BoxReveal'
 import Footer from '@/components/web/Footer'
 import { Carousel } from 'react-responsive-carousel'

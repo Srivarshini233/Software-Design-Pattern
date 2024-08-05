@@ -157,7 +157,7 @@ const UserHome = ({handleNavigation}) => {
               }`}
               onClick={() => setActiveCategory("Men")}
             >
-              MEN
+              BOYS
             </button>
             <button
               className={`mx-2 px-4 py-2 rounded ${
@@ -165,7 +165,7 @@ const UserHome = ({handleNavigation}) => {
               }`}
               onClick={() => setActiveCategory("Women")}
             >
-              WOMEN
+              GIRLS
             </button>
             <button
               className={`mx-2 px-4 py-2 rounded ${

@@ -14,7 +14,7 @@ const MenCategory = () => {
         <div className= "category-content" >
         <div
         className="category-item"
-    onClick = {() => handleNavigation("/eyeglass")}
+    onClick = {() => handleNavigation("/toyproduct")}
 style = {{ cursor: "pointer" }}
       >
     <img src="https://via.placeholder.com/100" alt = "Eyeglasses" />

@@ -7,7 +7,7 @@ import Notfound from './pages/Web/Notfound'
 import Weblayout from './layout/Weblayout'
 import Userlayout from './layout/Userlayout'
 import ShopByCategory from './pages/User/UserHome/UserLanding'
-import EyeglassProduct from './pages/User/UserHome/UserProduct'
+import ToyProduct from './pages/User/UserHome/UserProduct'
 import UserHome from './pages/User/UserHome/UserHome'
 import Adminlayout from './layout/Adminlayout'
 import AdminPanel from './pages/Admin/AdminPanel'
@@ -28,7 +28,7 @@ const App = () => {
         <Routes>
           <Route  element={<Userlayout/>}>
           <Route path='/shopbycategory' element={<ShopByCategory/>}/>
-          <Route path='/eyeglass' element={<EyeglassProduct/>}/>
+          <Route path='/toyproduct' element={<ToyProduct/>}/>
           <Route path='/userhome' element={<UserHome/>}/>
           </Route>
 

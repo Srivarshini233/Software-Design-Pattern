@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { ModeToggle } from '../mode-toggle'
 
 const Navbar = () => {
@@ -17,6 +17,12 @@ const Navbar = () => {
             link :'/register'
         },
     ]
+    const navigate = useNavigate();
+
+    // Function to handle navigation based on category
+    const handleNavigation = (path) => {
+        navigate(path);
+    };
     return (
         <div className='w-screen absolute h-[10vh]  flex flex-row justify-center items-center  border-b-2 border-primary/10 g-10 navbar'>
              <div className='h-full w-1/4 flex flex-row justify-center items-center'>

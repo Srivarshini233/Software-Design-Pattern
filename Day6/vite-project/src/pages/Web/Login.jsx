@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,7 +12,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Basic validation
@@ -20,13 +21,26 @@ const Login = () => {
             return;
         }
 
-        // Simulated login logic
-        if (email === 'iamneo@gmail.com' && password === '12345') {
-            navigate('/admin/dashboard'); // Navigate to Admin Panel
-        } else if (email !== '' && password !== '') {
-            navigate('/shopbycategory'); // Navigate to User Panel
-        } else {
-            setError('Invalid email or password.');
+        try {
+            const response = await axios.get('http://localhost:8080/users/login', {
+                params: {
+                    email,
+                    password
+                }
+            });
+
+            if (response.data) {
+                // Successful login
+                if (email === 'iamneo@gmail.com') {
+                    navigate('/admin/dashboard'); // Navigate to Admin Panel
+                } else {
+                    navigate('/shopbycategory'); // Navigate to User Panel
+                }
+            } else {
+                setError('Invalid email or password.');
+            }
+        } catch (error) {
+            setError('An error occurred during login: ' + error.message);
         }
     };
 
