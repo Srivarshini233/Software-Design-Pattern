@@ -7,8 +7,8 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 public class OrderRequest {
-    private Long userId;
-    private Long productId;
-    private String userAddress;
-    private String payMethod;
+    private Long u_id;
+    private Long product_id;
+    private String user_address;
+    private String pay_method;
 }

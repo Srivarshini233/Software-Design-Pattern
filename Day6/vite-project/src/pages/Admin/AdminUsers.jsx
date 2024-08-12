@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import {
   Table,
   TableBody,
@@ -10,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Edit, Plus, TrashIcon } from "lucide-react";
+import { Plus, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,41 +29,21 @@ import {
 
 const AdminUsers = () => {
   const [open, setOpen] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([
+    { uid: 1, name: 'John Doe', username: 'johndoe', email: 'john@example.com', password: 'password123' },
+    { uid: 2, name: 'Jane Smith', username: 'janesmith', email: 'jane@example.com', password: 'password456' }
+  ]);
   const [newUser, setNewUser] = useState({ name: '', username: '', email: '', password: '' });
 
-  useEffect(() => {
-    // Fetch users from backend
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/users/getusers');
-        setUsers(response.data);
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:8080/users/delete/${id}`);
-      setUsers(prevUsers => prevUsers.filter(user => user.uid !== id));
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
+  const handleDelete = (id) => {
+    setUsers(prevUsers => prevUsers.filter(user => user.uid !== id));
   };
 
-  const handleAddUser = async () => {
-    try {
-      const response = await axios.post('http://localhost:8080/users/register', newUser);
-      setUsers(prevUsers => [...prevUsers, response.data]);
-      setNewUser({ name: '', username: '', email: '', password: '' });
-      setOpen(false);
-    } catch (error) {
-      console.error('Error adding user:', error);
-    }
+  const handleAddUser = () => {
+    const newUserWithId = { ...newUser, uid: users.length + 1 };
+    setUsers(prevUsers => [...prevUsers, newUserWithId]);
+    setNewUser({ name: '', username: '', email: '', password: '' });
+    setOpen(false);
   };
 
   const handleChange = (e) => {

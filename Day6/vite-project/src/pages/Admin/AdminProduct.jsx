@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Edit, Plus, TrashIcon } from "lucide-react";
+import { Plus, TrashIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -30,41 +27,21 @@ import {
 
 const AdminProducts = () => {
   const [open, setOpen] = useState(false);
-  const [products, setProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({ image: '', name: '', color: '', price: '' });
+  const [products, setProducts] = useState([
+    { id: 1, name: 'Product 1', image: 'image1.jpg', price: 100, color: 'Red' },
+    { id: 2, name: 'Product 2', image: 'image2.jpg', price: 200, color: 'Blue' }
+  ]);
+  const [newProduct, setNewProduct] = useState({ name: '', image: '', price: 0, color: '' });
 
-  useEffect(() => {
-    // Fetch products from backend
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/users/getproduct');
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
-  const handleDelete = async (id) => {
-    try {
-      await axios.delete(`http://localhost:8080/users/deleteproduct/${id}`);
-      setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
-    } catch (error) {
-      console.error('Error deleting product:', error);
-    }
+  const handleDelete = (id) => {
+    setProducts(prevProducts => prevProducts.filter(product => product.id !== id));
   };
 
-  const handleAddProduct = async () => {
-    try {
-      const response = await axios.post('http://localhost:8080/users/addproducts', newProduct);
-      setProducts(prevProducts => [...prevProducts, response.data]);
-      setNewProduct({ imageUrl: '', name: '', color: '', price: '' });
-      setOpen(false);
-    } catch (error) {
-      console.error('Error adding product:', error);
-    }
+  const handleAddProduct = () => {
+    const newProductWithId = { ...newProduct, id: products.length + 1 };
+    setProducts(prevProducts => [...prevProducts, newProductWithId]);
+    setNewProduct({ name: '', image: '', price: 0, color: '' });
+    setOpen(false);
   };
 
   const handleChange = (e) => {
@@ -85,10 +62,10 @@ const AdminProducts = () => {
             <TableHeader>
               <TableRow>
                 <TableHead className="w-[100px]">Id</TableHead>
-                <TableHead>Image</TableHead>
                 <TableHead>Name</TableHead>
-                <TableHead>Color</TableHead>
+                <TableHead>Image</TableHead>
                 <TableHead>Price</TableHead>
+                <TableHead>Color</TableHead>
                 <TableHead className="flex justify-center">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -96,10 +73,10 @@ const AdminProducts = () => {
               {products.map((product) => (
                 <TableRow key={product.id}>
                   <TableCell className="font-medium">{product.id}</TableCell>
-                  <TableCell><img src={product.image} className="h-16 w-16 object-cover" /></TableCell>
                   <TableCell>{product.name}</TableCell>
-                  <TableCell>{product.color}</TableCell>
+                  <TableCell>{product.image}</TableCell>
                   <TableCell>{product.price}</TableCell>
+                  <TableCell>{product.color}</TableCell>
                   <TableCell>
                     <span className='w-full h-full flex justify-center items-center gap-3'>
                       <TrashIcon 
@@ -122,28 +99,28 @@ const AdminProducts = () => {
           </SheetHeader>
           <div className="grid gap-4 py-4">
             <div className="flex flex-col items-start gap-4">
-              <Label htmlFor="imageUrl" className="text-right">
-                Image URL
-              </Label>
-              <Input id="imageUrl" value={newProduct.image} onChange={handleChange} className="col-span-3" />
-            </div>
-            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="name" className="text-right">
                 Name
               </Label>
               <Input id="name" value={newProduct.name} onChange={handleChange} className="col-span-3" />
             </div>
             <div className="flex flex-col items-start gap-4">
-              <Label htmlFor="color" className="text-right">
-                Color
+              <Label htmlFor="image" className="text-right">
+                Image
               </Label>
-              <Input id="color" value={newProduct.color} onChange={handleChange} className="col-span-3" />
+              <Input id="image" value={newProduct.image} onChange={handleChange} className="col-span-3" />
             </div>
             <div className="flex flex-col items-start gap-4">
               <Label htmlFor="price" className="text-right">
                 Price
               </Label>
-              <Input id="price" value={newProduct.price} onChange={handleChange} className="col-span-3" />
+              <Input id="price" type="number" value={newProduct.price} onChange={handleChange} className="col-span-3" />
+            </div>
+            <div className="flex flex-col items-start gap-4">
+              <Label htmlFor="color" className="text-right">
+                Color
+              </Label>
+              <Input id="color" value={newProduct.color} onChange={handleChange} className="col-span-3" />
             </div>
           </div>
           <SheetFooter className='flex flex-col flex-1'>

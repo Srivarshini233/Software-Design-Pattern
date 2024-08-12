@@ -97,10 +97,11 @@
 
 /* Product list section styling */
 .products {
-  flex: 1;
-  padding: 5px; /* Adjusted padding */
+ 
+ /* Adjusted padding */
   margin-left: 200px; /* Adjusted space for the fixed filters */
-  margin-top: 60px; /* Adjusted to be below the navbar */
+  margin-top: 60px;
+  margin-top: 0%; /* Adjusted to be below the navbar */
   overflow-y: auto;
 }
 
@@ -109,7 +110,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 5px; /* Adjusted bottom margin */
+   /* Adjusted bottom margin */
 }
 
 .product-header h2 {
@@ -133,7 +134,7 @@
 /* Product grid styling */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 products per row */
+  grid-template-columns: repeat(4, 1fr); /* 3 products per row */
   gap: 15px; /* Adjusted gap */
   max-width: 100%;
   box-sizing: border-box;
@@ -181,7 +182,7 @@
   font-size: 18px; /* Adjusted font size */
   color: transparent;
   cursor: pointer;
-  transition: color 0.3s;
+  transition: color 0.5s;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -30,9 +30,9 @@ public class Orders {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    private String userAddress;
-    private String payMethod;
-    private Boolean orderConfirmed;
+    private String user_address;
+    private String pay_method;
+    private Boolean order_confirmed;
    
 
    

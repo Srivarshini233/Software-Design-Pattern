@@ -32,6 +32,7 @@ public class OrderRequest {
     public void setPayMethod(String payMethod) {
         this.payMethod = payMethod;
     }
+  
 
     
 }

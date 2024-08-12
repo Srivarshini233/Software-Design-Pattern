@@ -20,10 +20,10 @@ public class OrderController {
     @PostMapping("/post")
     public Orders createOrder(@RequestBody OrderRequest orderRequest) {
         return orderService.createOrder(
-            orderRequest.getUserId(),
-            orderRequest.getProductId(),
-            orderRequest.getUserAddress(),
-            orderRequest.getPayMethod()
+            orderRequest.getU_id(),
+            orderRequest.getProduct_id(),
+            orderRequest.getUser_address(),
+            orderRequest.getPay_method()
         );
     }
 }
